@@ -1,7 +1,6 @@
 import json
 import requests
 from geopy import distance
-from pprint import pprint
 import folium
 
 
@@ -55,6 +54,12 @@ def main():
 
     m = folium.Map(location=[coords[0], coords[1]], zoom_start=14)
 
+    folium.Marker(
+        location=[coords[0], coords[1]],
+        tooltip="Your location!",
+        icon=folium.Icon(color="red"),
+    ).add_to(m)
+
     for cafe in sorted_cafe[:5]:
         folium.Marker(
             location=[cafe["latitude"], cafe["longitude"]],
@@ -65,8 +70,6 @@ def main():
 
     m.save("index.html")
 
-    five_nearest = sorted_cafe[:5]
-    pprint(five_nearest)
 
 
 if __name__ == "__main__":
