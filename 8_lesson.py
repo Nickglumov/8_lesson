@@ -2,9 +2,8 @@ import json
 import requests
 from geopy import distance
 import folium
-
-
-APIKEY = "778295e1-90b2-41e5-bf3b-2f472d930a0c"
+from dotenv import load_dotenv
+import os
 
 
 def fetch_coordinates(apikey, address):
@@ -30,7 +29,9 @@ def get_cafe_distance(cafe):
 
 
 def main():
-    with open("coffee.json", "r") as my_file:
+    load_dotenv()
+    APIKEY = os.getenv('apikey')
+    with open("coffee.json","r",encoding="utf-8") as my_file:
         file_contents = my_file.read()
 
     content = json.loads(file_contents)
@@ -69,7 +70,6 @@ def main():
         ).add_to(m)
 
     m.save("index.html")
-
 
 
 if __name__ == "__main__":
