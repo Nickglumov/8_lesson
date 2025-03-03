@@ -30,14 +30,14 @@ def get_cafe_distance(cafe):
 
 def main():
     load_dotenv()
-    APIKEY = os.getenv('apikey')
-    with open("coffee.json","r",encoding="utf-8") as my_file:
+    api_key = os.getenv('apikey')
+    with open("coffee.json","r",encoding="windows-1251") as my_file:
         file_contents = my_file.read()
 
     content = json.loads(file_contents)
 
     answer = input("Где вы находитесь? ")
-    coords_str = fetch_coordinates(APIKEY, answer)
+    coords_str = fetch_coordinates(api_key, answer)
 
     coords = (float(coords_str[1]), float(coords_str[0]))
 
